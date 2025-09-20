@@ -2,23 +2,43 @@
 {% load static %}
 {% block title %}Blog{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
-<link rel="stylesheet" href="{% static 'main/css/posts.css' %}">
-<link rel="stylesheet" href="{% static 'main/css/home.css' %}">
-    <div class="hero-content">
-        <span><h1 class='hero-title'>Cazari, vacante in toata lumea</h1></span>
-    </div>
-        <div class="post-container">Postari cu imagini</div>
-            <div class="hotel-tmpl-box">
-                <div class="flex-row">
-                    <div class="flex-col-post">imagini</div>
-                        <a class="post-widget-item" href="" style="border-radius: 0px" target="_blank">
-                            <div class="post-widget-item-body">
-                                <div class="img-link">
-                                    <img class="post" src="media/post/swimming-pool.png" alt="">
-                                </div>
-                            </div>
-                        </a>
-                </div>
+<div class="hero-content">
+    <span><h1 class='hero-title'>Cazari, vacante in toata lumea</h1></span></div>
+<div class="destinations-section">
+    <h2>Destinații recomandate din cazare</h2>
+    <p>Descoperiți aceste destinații populare pentru cazare</p>
+    <div class="destinations-wrapper">
+        <button class="scroll-btn left"><</button>
+        <div class="destinations-container" id="destinations">
+            {% for destination in destinations %}
+            <div class="destination-card">
+                <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
+                <h3>{{ destination.name }}</h3>
+                <p>{{ destination.country }}</p>
+                {% if destination.accommodations < 2 %}
+                    <p><strong>{{ destination.accommodations }}</strong> cazare</p>
+                {% else %}
+                <p><strong>{{ destination.accommodations }}</strong> cazări</p>
+                {% endif %}
             </div>
+            {% endfor %}
+        </div>
+        <button class="scroll-btn right">></button>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const container = document.getElementById('destinations');
+  const leftBtn = document.querySelector('.scroll-btn.left');
+  const rightBtn = document.querySelector('.scroll-btn.right');
+
+  leftBtn.addEventListener('click', () => {
+    container.scrollBy({ left: -250, behavior: 'smooth' });
+  });
+
+  rightBtn.addEventListener('click', () => {
+    container.scrollBy({ left: 250, behavior: 'smooth' });
+  });
+});
+</script>
 {% endblock %}

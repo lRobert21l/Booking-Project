@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
+from .models import Destination
 
 # Create your views here.
 
@@ -57,9 +58,10 @@ def sign_up(request):
         context = {"form": form}
         return render(request,'registration/sign-up.html', context)
 
-def blog(request):
-    context = {}
-    return render(request,'main/blog.html', context)
+def destinations(request):
+    destinations = Destination.objects.all()
+
+    return render(request,'main/blog.html', {"destinations": destinations})
 
 def details(request):
     context = {}
