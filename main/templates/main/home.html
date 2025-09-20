@@ -1,13 +1,16 @@
 {% extends 'main/base.html' %}
 {% load static %}
-{% block title %}Home Page{% endblock %}
+{% block title %}
+Home Page
+{% endblock %}
 {% block content %}
     <div class="hero-section">
         <div class="hero-content">
-            <span><h1 class='hero-title'>Cazari, vacante in toata lumea</h1></span>
-            <form class='search-form' method="Post" action="">
+            <h1 class='hero-title'>Cazari, vacante in toata lumea</h1>
+            <form class='search-form' method="post" action="{% url 'search' %}">
             {% csrf_token %}
-            <input type="text" name="Location" placeholder="Hotel,Oras..." class="txt-input-u"/>
+            <label for="location">Location</label>
+            <input id="location" type="text" name="location" placeholder="Hotel,Oras..." class="txt-input"/>
             <input 
                 type="date" 
                 placeholder="Select Booking Date"
@@ -15,7 +18,7 @@
                 value="2025-09-19"
                 min="2025-09-19"
                 max="2025-12-31" />
-            <button type="submit">Cauta</button>
+            <button type="submit" value="search">Cauta</button>
             </form>
         </div>
     </div>

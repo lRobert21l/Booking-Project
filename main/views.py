@@ -5,12 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm, SearchForm
 from .models import Destination
+from datetime import date
 
 # Create your views here.
 
 
 def home(request):
-    return render(request,'main/home.html')
+    today = date.today()
+    return render(request, 'home.html', {'today': today})
 
 def log_in(request):
     if request.user.is_authenticated:
@@ -82,11 +84,9 @@ def search(request):
                 available_from__lte=date,
                 available_to__gte=date
             )
-        
-    return render(request, 'search.html',{
-        'form': form,
-        'results':results
-    })
+            
+    context = {"form": form}
+    return render(request,'/results.html', context)
 
 def details(request):
     context = {}

@@ -1,30 +1,31 @@
 {% extends 'main/base.html' %}
 {% load static %}
-{% block title %}Blog{% endblock %}
+{% block title %}
+Blog
+{% endblock %}
 {% block content %}
+  <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 <div class="hero-content">
     <span><h1 class='hero-title'>Cazari, vacante in toata lumea</h1></span></div>
 <div class="destinations-section">
-    <h2>Destinații recomandate din cazare</h2>
-    <p>Descoperiți aceste destinații populare pentru cazare</p>
-    <div class="destinations-wrapper">
-        <button class="scroll-btn left"><</button>
-        <div class="destinations-container" id="destinations">
-            {% for destination in destinations %}
-            <div class="destination-card">
-                <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
-                <h3>{{ destination.name }}</h3>
-                <p>{{ destination.country }}</p>
-                {% if destination.accommodations < 2 %}
-                    <p><strong>{{ destination.accommodations }}</strong> cazare</p>
-                {% else %}
-                <p><strong>{{ destination.accommodations }}</strong> cazări</p>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-        <button class="scroll-btn right">></button>
-    </div>
+      <div class="destinations-wrapper">
+          <button class="scroll-btn left"><</button>
+          <div class="destinations-container" id="destinations">
+              {% for destination in destinations %}
+              <div class="destination-card">
+                  <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
+                  <h3>{{ destination.name }}</h3>
+                  <p>{{ destination.country }}</p>
+                  {% if destination.accommodations < 2 %}
+                      <p><strong>{{ destination.accommodations }}</strong> cazare</p>
+                  {% else %}
+                  <p><strong>{{ destination.accommodations }}</strong> cazări</p>
+                  {% endif %}
+              </div>
+              {% endfor %}
+          </div>
+          <button class="scroll-btn right">></button>
+      </div>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {

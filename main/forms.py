@@ -17,11 +17,10 @@ class UserLoginForm(AuthenticationForm):
 
 class SearchForm(forms.Form):
     query = forms.CharField(
-        max_length=255, 
-        required=False, 
-        widget=forms.TextInput(attrs={'placeholder': 'Hotel, Oras...'})
+        label="Oraș",
+        widget=forms.TextInput(attrs={"placeholder": "Introduceți orașul..."})
     )
     date = forms.DateField(
-        required=False,
-        widget=forms.DateInput(attrs={'type': 'date'})
+        label="Data",
+        widget=forms.DateInput(attrs={"type": "date"})
     )

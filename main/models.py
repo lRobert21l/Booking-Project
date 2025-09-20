@@ -16,5 +16,5 @@ class Destination(models.Model):
     statustype = models.CharField(max_length=10, choices=StatusType, default=StatusType.PENDING)
 
     def __str__(self):
-        return f"{self.name},{self.country}"
+        return f"{self.city} - {self.country}"
 
