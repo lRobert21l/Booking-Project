@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import UserRegisterForm, UserLoginForm
+from .forms import UserRegisterForm, UserLoginForm, SearchForm
 from .models import Destination
 
 # Create your views here.
@@ -62,6 +62,31 @@ def destinations(request):
     destinations = Destination.objects.all()
 
     return render(request,'main/blog.html', {"destinations": destinations})
+
+def search(request):
+    form = SearchForm(request.GET or None)
+    results= []
+
+    if form.is_valid():
+        query = form.cleaned_data.get('query')
+        date = form.cleaned_data.get('date')
+
+        results = Destination.objects.all()
+
+        if query:
+            results = results.filter(
+                Destination(name__icontains=query) | Destination(country__icontains=query)
+            )
+        if date:
+            results = results.filter(
+                available_from__lte=date,
+                available_to__gte=date
+            )
+        
+    return render(request, 'search.html',{
+        'form': form,
+        'results':results
+    })
 
 def details(request):
     context = {}

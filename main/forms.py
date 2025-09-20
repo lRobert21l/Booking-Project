@@ -14,3 +14,14 @@ class UserLoginForm(AuthenticationForm):
 
     username = forms.CharField(max_length=100, required=True)
     password = forms.CharField(widget=forms.PasswordInput, required=True)
+
+class SearchForm(forms.Form):
+    query = forms.CharField(
+        max_length=255, 
+        required=False, 
+        widget=forms.TextInput(attrs={'placeholder': 'Hotel, Oras...'})
+    )
+    date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
