@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/posts.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+    <div class="hero-content">
+        <span><h1 class='hero-title'>Cazari, vacante in toata lumea</h1></span>
+    </div>
+        <div class="post-container">Postari cu imagini</div>
+            <div class="hotel-tmpl-box">
+                <div class="flex-row">
+                    <div class="flex-col-post">imagini</div>
+                        <a class="post-widget-item" href="" style="border-radius: 0px" target="_blank">
+                            <div class="post-widget-item-body">
+                                <div class="img-link">
+                                    <img class="post" src="media/post/swimming-pool.png" alt="">
+                                </div>
+                            </div>
+                        </a>
+                </div>
+            </div>
+{% endblock %}

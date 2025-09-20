@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+Login
+{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login</title>
+</head>
+<body>
+	<div class="user_card-log">
+		<h1 id="form-title-log">LogIn</h1>
+			<div class="form_container-log">
+				<div>
+					<form method="POST" action="">
+						{% csrf_token %}
+						<div class="user-input">
+							<div class="user-input">
+							</div>
+							<input type="text" name="username" placeholder="Username..." class="txt-input-u">
+						<div class="pass-input">
+							<div class="password-input">
+							</div>
+								<input type="password" name="password" placeholder="Password..." class="txt-input-p" >
+						</div>
+							<div class="login-button">
+								<input class="login_btn" type="submit" value="Login">
+							</div>
+					</form>
+				</div>
+			</div>
+		{% for message in messages %}
+			<p id="messages">{{message}}</p>
+		{% endfor %}
+		{{form.errors}}
+		<div class="no_acc">
+			<p>Don't have an account?</p>
+			<a href="{% url 'sign-up' %}" class="rdr-signup">Sign Up</a> 
+		</div>
+	</div>
+</body>
+
+</html>
+{% endblock %}

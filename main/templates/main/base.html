@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <script src="{% static 'main/js/style.js' %}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Home Site</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <ul class="dropdown">
+                <li>
+                <button class="dropbtn" onclick="toggleDropdown()">REISING</button>
+                <ul class="dropdown-content" id="dropdownMenu">
+                    <li>
+                    <a href="/home">
+                        <span class="material-symbols-outlined">home</span></a>
+                    </li>
+                    <li><a href="/about">Despre</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+                </li>
+            </ul>
+            <ul class="sidebar">
+                <li>
+                    <a class="details" href="{% url 'details' %}">
+                    <span>{{user.username}}</span></a>
+                </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'user' %}" class="profile">
+                    <span class="icon">Profil<span class="navbar-text"></span></span>
+                    </a>
+                </li>
+                {% endif %}
+                    <li><a href="/blog">Blog</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link-delog" href="{% url 'logout' %}">Logout<span class="material-symbols-outlined">logout</span></a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link-log" href="{% url 'login' %}">Login<span class="material-symbols-outlined">login</span></a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+        {% block content %}
+        {% endblock %}
+</body>
+</html>
