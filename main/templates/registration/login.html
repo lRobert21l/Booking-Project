@@ -18,17 +18,15 @@ Login
 					<form method="POST" action="">
 						{% csrf_token %}
 						<div class="user-input">
-							<div class="user-input">
-							</div>
-							<input type="text" name="username" placeholder="Username..." class="txt-input-u">
-						<div class="pass-input">
-							<div class="password-input">
-							</div>
-								<input type="password" name="password" placeholder="Password..." class="txt-input-p" >
+							<input type="text" name="username" placeholder="Username..." class="txt-input-u" required>
 						</div>
+						<div class="password-input">
+								<input type="password" name="password" placeholder="Password..." class="txt-input-p" required>
+						</div>
+						<div>
 							<div class="login-button">
 								<input class="login_btn" type="submit" value="Login">
-							</div>
+						</div>
 					</form>
 				</div>
 			</div>

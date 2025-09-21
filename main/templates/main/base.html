@@ -13,12 +13,12 @@
     <title>Home Site</title>
 </head>
 <body class="bg" style="
-    background-image: url('{% static "/background/background.jpg" %}');">
+    background-image: url('{% static "/background/background.jpg" %}');>
     <header class="header">
         <nav class="navbar">
             <ul class="dropdown">
                 <li>
-                <button class="dropbtn" onclick="toggleDropdown()">𝓡𝓮𝓲𝓼𝓲𝓷𝓰</button>
+                <button class="dropbtn" onclick="toggleDropdown()">Reising</button>
                 <ul class="dropdown-content" id="dropdownMenu">
                     <li>
                     <a href="/home">
@@ -30,14 +30,10 @@
                 </li>
             </ul>
             <ul class="sidebar">
-                <li>
-                    <a class="details" href="{% url 'details' %}">
-                    <span>{{user.username}}</span></a>
-                </li>
                 {% if user.is_authenticated %}
                 <li>
                     <a href="{% url 'user' %}" class="profile">
-                    <span class="icon">Profil<span class="navbar-text"></span></span>
+                    <span class="icon">{{user.username}}<span class="navbar-text"></span></span>
                     </a>
                 </li>
                 {% endif %}

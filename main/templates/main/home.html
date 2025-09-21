@@ -7,18 +7,20 @@ Home Page
     <div class="hero-section">
         <div class="hero-content">
             <h1 class='hero-title'>Cazari, vacante in toata lumea</h1>
-            <form class='search-form' method="post" action="{% url 'search' %}">
+            <form class='search-form' method="post" action="{% url 'results' %}">
             {% csrf_token %}
-            <label for="location">Location</label>
-            <input id="location" type="text" name="location" placeholder="Hotel,Oras..." class="txt-input"/>
+            <div class="location-input">
+				<input type="text" name="location" placeholder="Țară,Oraș..." class="location" required>
+		    </div>
             <input 
+                id="trip-start"
                 type="date" 
-                placeholder="Select Booking Date"
-                name="trip-start"
-                value="2025-09-19"
-                min="2025-09-19"
-                max="2025-12-31" />
-            <button type="submit" value="search">Cauta</button>
+                name="trip_start"
+                value="{{ today|date:'Y-m-d' }}"
+                min="{{ today|date:'Y-m-d' }}"
+                max="2025-12-31" 
+                required />
+            <button type="submit" value="">Cauta</button>
             </form>
         </div>
     </div>

@@ -16,11 +16,5 @@ class UserLoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput, required=True)
 
 class SearchForm(forms.Form):
-    query = forms.CharField(
-        label="Oraș",
-        widget=forms.TextInput(attrs={"placeholder": "Introduceți orașul..."})
-    )
-    date = forms.DateField(
-        label="Data",
-        widget=forms.DateInput(attrs={"type": "date"})
-    )
+    location = forms.CharField(max_length=100, required=False)
+    date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}), label="Date")

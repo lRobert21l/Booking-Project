@@ -12,7 +12,7 @@ from datetime import date
 
 def home(request):
     today = date.today()
-    return render(request, 'home.html', {'today': today})
+    return render(request, 'main/home.html', {'today': today})
 
 def log_in(request):
     if request.user.is_authenticated:
@@ -65,36 +65,35 @@ def destinations(request):
 
     return render(request,'main/blog.html', {"destinations": destinations})
 
-def search(request):
-    form = SearchForm(request.GET or None)
-    results= []
+def results(request):
+    if request.method == "POST":
+        location = request.POST.get('location')
+        date = request.POST.get('date')
 
-    if form.is_valid():
-        query = form.cleaned_data.get('query')
-        date = form.cleaned_data.get('date')
+        destinations = Destination.objects.all()
 
-        results = Destination.objects.all()
+        # Filter by location
+        if location:
+            destinations = destinations.filter(city__icontains=location) | destinations.filter(country__icontains=location)
 
-        if query:
-            results = results.filter(
-                Destination(name__icontains=query) | Destination(country__icontains=query)
-            )
+        # Filter by date if needed (example: only show future destinations)
         if date:
-            results = results.filter(
-                available_from__lte=date,
-                available_to__gte=date
-            )
-            
-    context = {"form": form}
-    return render(request,'/results.html', context)
+            # You can extend with date filtering logic
+            pass
 
-def details(request):
-    context = {}
-    return render(request,'main/details.html', context)
+        return render(request, 'main/results.html',
+            {
+                'destinations': destinations,
+                'location': location,
+                'date': date,
+            }
+        )
+
+    return render(request, 'main/results.html', {'destinations': []})
 
 def user(request):
     context = {}
-    return render(request,'main/blog.html', context)
+    return render(request,'main/details.html', context)
 
 def about(request):
     context = {}
